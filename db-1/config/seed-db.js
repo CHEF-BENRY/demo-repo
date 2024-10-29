@@ -15,6 +15,9 @@ const createTables = async () => {
     try {
         console.log('creating cats...');
         const createQuery = `
+                CREATE TABLE IF NOT EXISTS cats (
+                id INT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+                name TEXT NOT NULL
 
             );
         `;
@@ -30,7 +33,7 @@ const insertData = async () => {
     try {
         console.log('adding initial data...');
         const insertQuery = `
-
+            INSERT INTO cats (name, color, human) VALUES ('jiji','black', 'kiki');
             
         `;
         await pool.query(insertQuery);
@@ -40,7 +43,7 @@ const insertData = async () => {
 }
 
 const setup = async () => {
-    await dropTables();
+    // await dropTables();
     await createTables();
     await insertData();
 }
